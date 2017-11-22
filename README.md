@@ -1,4 +1,5 @@
-# Starter that uses Adonis JS on the backend and Vue on the frontend
+# Adonis - Vue
+### Starter that uses Adonis JS on the backend and Vue on the frontend
 
 ## Adonis comes pre-configured with the following:
 
