@@ -1,10 +1,12 @@
 <template>
     <div class="columns">
       <ul class="todos">
-        <li class="todo" v-for="todo in list">
-          {{ todo.title }}
-          <button v-on:click="deleteTask(todo.id)">Delete</button>
-        </li>
+        <transition-group name="fade">
+          <li class="todo" v-for="todo in list" v-bind:key="todo.id">
+            {{ todo.title }}
+            <button v-on:click.prevent="deleteTask(todo.id)">Delete</button>
+          </li>
+        </transition-group>
       </ul>
     </div>
 </template>
@@ -97,3 +99,12 @@
         }
     }
 </script>
+
+<style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0
+  }
+</style>
