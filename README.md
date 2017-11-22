@@ -1,6 +1,6 @@
-# Adonis fullstack application
+# Starter that uses Adonis JS on the backend and Vue on the frontend
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+## Adonis comes pre-configured with the following:
 
 1. Bodyparser
 2. Session
@@ -13,19 +13,4 @@ This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
 
 ## Setup
 
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick
-```
-
-or manually clone the repo and then run `npm install`.
-
-
-### Migrations
-
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
-```
+Run npm install in adonis-tasks directory, then cd to client directory and run npm install there.
