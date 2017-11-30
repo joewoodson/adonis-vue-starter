@@ -6,7 +6,7 @@
         <transition-group name="fade">
           <li class="todo" v-for="todo in list" v-bind:key="todo.id">
             <button class="btn btn-warning btn-circle mr-4" v-on:click.prevent="deleteTask(todo.id)">X</button>
-            <span>{{ todo.title }}</span>
+            <span v-bind:class="{ 'completed': todo.completed }">{{ todo.title }}</span>
           </li>
         </transition-group>
       </ul>
@@ -31,7 +31,8 @@
                 task: {
                     id: '',
                     body: '',
-                    archive: ''
+                    archive: '',
+                    completed: false,
                 },
                 editingTask: {},
                 activeItem: 'current'
@@ -122,6 +123,10 @@
     margin: 12px 0;
     display: flex;
     align-items: center;
+  }
+
+  .todo .completed {
+    text-decoration: line-through;
   }
 
   .btn {
