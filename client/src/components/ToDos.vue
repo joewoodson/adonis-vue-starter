@@ -1,10 +1,12 @@
 <template>
     <div class="columns">
+      <input class="input" type="text" placeholder="New task" v-model="task.body">
+      <button class="btn" @click="createTask()">Add Task</button>
       <ul class="todos">
         <transition-group name="fade">
           <li class="todo" v-for="todo in list" v-bind:key="todo.id">
             <button class="btn btn-warning btn-circle mr-4" v-on:click.prevent="deleteTask(todo.id)">X</button>
-            {{ todo.title }}
+            <span>{{ todo.title }}</span>
           </li>
         </transition-group>
       </ul>
@@ -52,21 +54,21 @@
                 }).catch(err => {
                     console.log(err);
                 });
-            }
+            },
             // isActive(menuItem) {
             //     return this.activeItem === menuItem;
             // },
             // setActive(menuItem) {
             //     this.activeItem = menuItem;
             // },
-            // createTask() {
-            //     axios.post('create_task', this.task).then(result                        => {
-            //         this.task.body = '';
-            //         this.fetchTaskList();
-            //     }).catch(err => {
-            //         console.log(err);
-            //     });
-            // },
+            createTask() {
+                axios.post('http://localhost:3333/tasks', this.task).then(result => {
+                    this.task.body = '';
+                    this.fetchTaskList();
+                }).catch(err => {
+                    console.log(err);
+                });
+            },
             // editTask(task) {
             //     this.editingTask = task;
             // },
@@ -105,6 +107,10 @@
     margin-right: 4px;
   }
 
+  .input {
+    font-size: 16px;
+  }
+
   .todos {
     list-style-type: none;
     padding-left: 0;
@@ -120,10 +126,10 @@
 
   .btn {
     border: none;
+    border-radius: 3px;
     cursor: pointer;
     background: lightgrey;
     padding: 3px 5px;
-    font-weight: bold;
   }
 
   .btn-circle {

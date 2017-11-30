@@ -13,29 +13,16 @@ class TaskController {
   }
 
   async store ({ request, response, session }) {
-    // validate form input
-    const validation = await validate(request.all(), {
-      title: 'required|min:3|max:255'
-    })
 
-    // show error messages upon validation fail
-    if (validation.fails()) {
-      session.withErrors(validation.messages())
-              .flashAll()
-
-      return response.redirect('back')
-    }
+    // get task from the request
+    const reqTask = request.post()
 
     // persist to database
     const task = new Task()
-    task.title = request.input('title')
+    task.title = reqTask.body
     task.completed = false
     await task.save()
 
-    // Flash success message to session
-    session.flash({ notification: 'Task added!' })
-
-    return response.redirect('back')
   }
 
   async destroy ({ params, session, response }) {
