@@ -3,8 +3,8 @@
       <ul class="todos">
         <transition-group name="fade">
           <li class="todo" v-for="todo in list" v-bind:key="todo.id">
+            <button class="btn btn-warning btn-circle mr-4" v-on:click.prevent="deleteTask(todo.id)">X</button>
             {{ todo.title }}
-            <button v-on:click.prevent="deleteTask(todo.id)">Delete</button>
           </li>
         </transition-group>
       </ul>
@@ -101,6 +101,41 @@
 </script>
 
 <style>
+  .mr-4 {
+    margin-right: 4px;
+  }
+
+  .todos {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .todo {
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .btn {
+    border: none;
+    cursor: pointer;
+    background: lightgrey;
+    padding: 3px 5px;
+    font-weight: bold;
+  }
+
+  .btn-circle {
+    border-radius: 50%;
+  }
+
+  .btn-warning {
+    background: #ff7070;
+    color: #fff;
+    font-size: 8px;
+  }
+
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s
   }
