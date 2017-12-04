@@ -44,9 +44,6 @@ class TaskController {
 
     await task.save()
 
-    // Flash success message to session
-    session.flash({ notification: 'Task completed!' })
-
   }
 
 }

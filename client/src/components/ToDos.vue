@@ -8,7 +8,7 @@
       </div>
       <ul class="todos">
         <transition-group name="fade">
-          <li class="todo" v-for="todo in list" v-bind:key="todo.id">
+          <li class="todo" v-for="todo in list" @click="completeTask(todo.id)" v-bind:key="todo.id">
             <button class="btn btn-warning btn-circle mr-4" v-on:click.prevent="deleteTask(todo.id)">X</button>
             <span v-bind:class="{ 'completed': todo.completed }">{{ todo.title }}</span>
           </li>
@@ -66,12 +66,6 @@
                     console.log(err);
                 });
             },
-            // isActive(menuItem) {
-            //     return this.activeItem === menuItem;
-            // },
-            // setActive(menuItem) {
-            //     this.activeItem = menuItem;
-            // },
             createTask() {
                 axios.post('http://localhost:3333/tasks', this.task).then(result => {
                     this.task.body = '';
@@ -80,6 +74,13 @@
                     console.log(err);
                 });
             },
+            completeTask(id) {
+              axios.put(`http://localhost:3333/tasks/${id}`).then(result => {
+                this.fetchTaskList();
+              }).catch(err => {
+                console.log(err);
+              })
+            }
             // editTask(task) {
             //     this.editingTask = task;
             // },
