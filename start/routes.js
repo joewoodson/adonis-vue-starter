@@ -18,6 +18,7 @@ const Route = use('Route')
 // Route.on('/').render('welcome')
 
 Route.get('/tasks', 'TaskController.index')
+Route.get('/tasks/uncompleted', 'TaskController.uncompleted')
 Route.post('tasks', 'TaskController.store')
 Route.delete('tasks/:id', 'TaskController.destroy')
 Route.put('tasks/:id', 'TaskController.update')

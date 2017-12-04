@@ -2,6 +2,10 @@
     <div class="columns">
       <input class="input" type="text" placeholder="New task" v-model="task.body">
       <button class="btn" @click="createTask()">Add Task</button>
+      <div class="filter-toggle">
+        <button class="toggle" @click="fetchTaskList()">All</button>
+        <button class="toggle" @click="fetchTaskListCompleted()">Uncompleted</button>
+      </div>
       <ul class="todos">
         <transition-group name="fade">
           <li class="todo" v-for="todo in list" v-bind:key="todo.id">
@@ -44,6 +48,12 @@
         methods: {
             fetchTaskList() {
                 const url = 'http://localhost:3333/tasks';
+                axios.get(url).then(result => {
+                    this.list = result.data;
+                });
+            },
+            fetchTaskListCompleted() {
+                const url = 'http://localhost:3333/tasks/uncompleted';
                 axios.get(url).then(result => {
                     this.list = result.data;
                 });
@@ -134,7 +144,7 @@
     border-radius: 3px;
     cursor: pointer;
     background: lightgrey;
-    padding: 3px 5px;
+    padding: 2px 4px;
   }
 
   .btn-circle {
@@ -142,9 +152,16 @@
   }
 
   .btn-warning {
+    border: 1px solid #ff7070;
+    background: transparent;
+    color: #ff7070;
+    font-size: 8px;
+  }
+
+  .btn-warning:hover {
     background: #ff7070;
     color: #fff;
-    font-size: 8px;
+    border-color: transparent;
   }
 
   .fade-enter-active, .fade-leave-active {

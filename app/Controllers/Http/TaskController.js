@@ -5,10 +5,17 @@ const { validate } = use('Validator')
 
 class TaskController {
 
-  async index ({ request, response, sessons }) {
-    const tasks = await Task.all()
+  async index ({ request, response, sessions }) {
+    let tasks = await Task.all()
 
-    // return tasks;
+    // return tasks
+    response.json(tasks);
+  }
+
+  async uncompleted ({ request, response, sessions }) {
+    let tasks = await Task.query().where('completed', 0).fetch()
+
+    // return tasks
     response.json(tasks);
   }
 
@@ -29,10 +36,6 @@ class TaskController {
     const task = await Task.find(params.id)
     await task.delete()
 
-    // Flash success message to session
-    // session.flash({ notification: 'Task deleted!' })
-
-    // return response.redirect('back')
   }
 
   async update ({ params, session, response }) {
@@ -44,7 +47,6 @@ class TaskController {
     // Flash success message to session
     session.flash({ notification: 'Task completed!' })
 
-    return response.redirect('back')
   }
 
 }
